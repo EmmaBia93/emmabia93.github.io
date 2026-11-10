@@ -1,74 +1,414 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emmanuel Biazzetti | Portfolio</title>
-    <meta name="description" content="Profesional de telecomunicaciones, redes, infraestructura IT y automatización.">
+    <title>Emmanuel Biazzetti | Redes, Telecomunicaciones e Infraestructura IT</title>
+    <meta name="description" content="Emmanuel Biazzetti — Administrador de redes y técnico en telecomunicaciones en San Juan, Argentina. MikroTik, Cisco, Ubiquiti, fibra óptica, Linux y automatización con Python.">
+    <meta name="theme-color" content="#0b1220">
+    <meta property="og:title" content="Emmanuel Biazzetti | Redes e Infraestructura IT">
+    <meta property="og:description" content="Administración de redes, ISP, fibra óptica, videovigilancia IP y automatización. San Juan, Argentina.">
+    <meta property="og:type" content="website">
     <style>
+        :root {
+            --bg: #0b1220;
+            --bg-soft: #111a2e;
+            --card: #14203a;
+            --border: rgba(148, 163, 184, .16);
+            --text: #e8eefc;
+            --muted: #9fb0cf;
+            --accent: #38bdf8;
+            --accent-2: #6366f1;
+            --radius: 16px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: Arial, sans-serif;
-            background: #101827;
-            color: #f1f5f9;
-            margin: 0;
-            padding: 50px 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
         }
-        main {
-            max-width: 800px;
-            margin: auto;
+        canvas#net {
+            position: fixed; inset: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none; opacity: .55;
         }
-        h1 { font-size: 38px; }
-        p { color: #cbd5e1; line-height: 1.7; }
-        a {
-            display: inline-block;
-            background: #2563eb;
-            color: white;
-            padding: 12px 18px;
-            margin: 10px 8px 10px 0;
-            border-radius: 7px;
-            text-decoration: none;
+        .wrap { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+        /* NAV */
+        nav {
+            position: sticky; top: 0; z-index: 10;
+            backdrop-filter: blur(12px);
+            background: rgba(11, 18, 32, .72);
+            border-bottom: 1px solid var(--border);
         }
-        section { margin-top: 35px; }
+        nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .logo { font-weight: 800; letter-spacing: .5px; }
+        .logo span { color: var(--accent); }
+        nav ul { display: flex; gap: 22px; list-style: none; }
+        nav a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color .2s; }
+        nav a:hover { color: var(--accent); }
+
+        /* HERO */
+        .hero { padding: 110px 0 80px; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 14px; border-radius: 999px;
+            border: 1px solid var(--border); background: rgba(56, 189, 248, .08);
+            color: var(--accent); font-size: 13px; font-weight: 600;
+        }
+        .badge i { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px #22c55e; }
+        h1 { font-size: clamp(40px, 7vw, 72px); line-height: 1.05; margin: 22px 0 14px; letter-spacing: -1.5px; }
+        h1 em {
+            font-style: normal;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .role { font-size: clamp(16px, 2.4vw, 21px); color: var(--muted); margin-bottom: 22px; }
+        .lead { max-width: 640px; color: #c3cfe6; font-size: 17px; }
+        .cta { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 13px 22px; border-radius: 10px; font-weight: 600; font-size: 15px;
+            text-decoration: none; transition: transform .2s, box-shadow .2s, background .2s;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .btn.primary { background: linear-gradient(90deg, var(--accent-2), #2563eb); color: #fff; box-shadow: 0 8px 24px rgba(79, 70, 229, .35); }
+        .btn.ghost { border: 1px solid var(--border); color: var(--text); background: rgba(255, 255, 255, .03); }
+        .btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-top: 56px; }
+        .stat { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+        .stat b { display: block; font-size: 30px; color: var(--accent); }
+        .stat span { color: var(--muted); font-size: 14px; }
+
+        /* SECTIONS */
+        section { padding: 70px 0; }
+        .eyebrow { color: var(--accent); font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+        h2 { font-size: clamp(28px, 4vw, 38px); margin: 8px 0 14px; letter-spacing: -.5px; }
+        .sub { color: var(--muted); max-width: 620px; margin-bottom: 36px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+        .card {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 26px;
+            transition: transform .25s, border-color .25s, box-shadow .25s;
+        }
+        .card:hover { transform: translateY(-4px); border-color: rgba(56, 189, 248, .5); box-shadow: 0 14px 34px rgba(0, 0, 0, .35); }
+        .card .ico { font-size: 28px; margin-bottom: 12px; }
+        .card h3 { font-size: 18px; margin-bottom: 8px; }
+        .card p { color: var(--muted); font-size: 15px; }
+        .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+        .tag {
+            font-size: 12px; padding: 4px 10px; border-radius: 999px;
+            background: rgba(99, 102, 241, .14); color: #b9bdff; border: 1px solid rgba(99, 102, 241, .3);
+        }
+
+        /* TIMELINE */
+        .timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+        .item { position: relative; margin-bottom: 34px; }
+        .item::before {
+            content: ""; position: absolute; left: -37px; top: 6px;
+            width: 14px; height: 14px; border-radius: 50%;
+            background: var(--accent); box-shadow: 0 0 0 4px var(--bg), 0 0 14px var(--accent);
+        }
+        .item .when { color: var(--accent); font-size: 13px; font-weight: 700; }
+        .item h3 { font-size: 20px; margin: 2px 0; }
+        .item .where { color: var(--muted); font-size: 15px; margin-bottom: 8px; }
+        .item ul { padding-left: 18px; color: #c3cfe6; font-size: 15px; }
+        .item li { margin-bottom: 4px; }
+
+        /* SKILLS */
+        .skill-group h3 { font-size: 16px; margin-bottom: 4px; }
+
+        /* CONTACT */
+        .contact {
+            text-align: center; background: linear-gradient(135deg, rgba(99, 102, 241, .22), rgba(56, 189, 248, .12));
+            border: 1px solid var(--border); border-radius: 24px; padding: 60px 24px;
+        }
+        .contact p { color: #c3cfe6; max-width: 540px; margin: 0 auto 28px; }
+        .contact .cta { justify-content: center; }
+
+        footer { padding: 36px 0 50px; text-align: center; color: var(--muted); font-size: 13px; }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s, transform .7s; }
+        .reveal.show { opacity: 1; transform: none; }
+
+        @media (max-width: 640px) {
+            nav ul { display: none; }
+            .hero { padding: 70px 0 50px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .reveal { opacity: 1; transform: none; transition: none; }
+            canvas#net { display: none; }
+        }
     </style>
 </head>
 <body>
-<main>
-    <header>
-        <h1>Emmanuel Biazzetti</h1>
-        <p>Telecomunicaciones | Network Engineer | IT Infrastructure</p>
-        <p>
-            Profesional con experiencia en administración
-            de redes, infraestructura de ISP, soporte IT
-            y automatización de procesos.
+<canvas id="net" aria-hidden="true"></canvas>
+
+<nav>
+    <div class="wrap">
+        <div class="logo">EB<span>.</span>net</div>
+        <ul>
+            <li><a href="#sobre-mi">Sobre mí</a></li>
+            <li><a href="#habilidades">Habilidades</a></li>
+            <li><a href="#experiencia">Experiencia</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main class="wrap">
+
+    <!-- HERO -->
+    <header class="hero">
+        <span class="badge"><i></i> Disponible para nuevas oportunidades</span>
+        <h1>Hola, soy <em>Emmanuel Biazzetti</em></h1>
+        <p class="role">Telecomunicaciones · Administración de Redes · Infraestructura IT · Automatización</p>
+        <p class="lead">
+            Diseño, opero y automatizo redes. Más de 10 años resolviendo problemas de infraestructura,
+            desde el soporte técnico hasta redes de ISP con fibra óptica y sistemas de videovigilancia IP segmentados.
         </p>
-        <a href="cv.pdf" target="_blank">Ver mi CV</a>
-        <a href="https://github.com/EmmaBia93">GitHub</a>
-        <a href="https://www.linkedin.com/">LinkedIn</a>
+        <div class="cta">
+            <a class="btn primary" href="cv.pdf" target="_blank" rel="noopener">📄 Ver mi CV</a>
+            <a class="btn ghost" href="https://github.com/EmmaBia93" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn ghost" href="#contacto">✉️ Contactar</a>
+        </div>
+
+        <div class="stats">
+            <div class="stat"><b>10+</b><span>años en soporte e infraestructura</span></div>
+            <div class="stat"><b>ISP</b><span>fibra óptica, OLT y routing</span></div>
+            <div class="stat"><b>IP CCTV</b><span>redes segmentadas de videovigilancia</span></div>
+            <div class="stat"><b>Python</b><span>automatización y monitoreo</span></div>
+        </div>
     </header>
 
-    <section>
-        <h2>Experiencia técnica</h2>
-        <p>
-            Administración de redes, routing, switching,
-            VLAN, MikroTik, Cisco, Ubiquiti, FTTH,
-            Linux y soporte de infraestructura.
+    <!-- SOBRE MI -->
+    <section id="sobre-mi" class="reveal">
+        <span class="eyebrow">Sobre mí</span>
+        <h2>Redes que funcionan, y procesos que se automatizan</h2>
+        <p class="sub">
+            Soy de San Juan, Argentina. Empecé en soporte técnico e infraestructura y fui creciendo hacia
+            la administración de redes de proveedores de internet. Me interesa especialmente la operación
+            de redes (NOC/SOC), la ciberseguridad y el desarrollo de herramientas propias para que el trabajo
+            repetitivo lo haga el código.
         </p>
+        <div class="grid">
+            <div class="card">
+                <div class="ico">🌐</div>
+                <h3>Redes e ISP</h3>
+                <p>Routing, switching, VLAN y administración de redes de proveedores con tecnología MikroTik, Cisco y Ubiquiti.</p>
+            </div>
+            <div class="card">
+                <div class="ico">🔦</div>
+                <h3>Fibra óptica</h3>
+                <p>FTTH y gestión de OLT ZTE y Ubiquiti: puesta en marcha, aprovisionamiento y soporte.</p>
+            </div>
+            <div class="card">
+                <div class="ico">🛡️</div>
+                <h3>Videovigilancia IP</h3>
+                <p>Redes segmentadas para cámaras Hikvision con switching TP-Link y routing MikroTik.</p>
+            </div>
+            <div class="card">
+                <div class="ico">⚙️</div>
+                <h3>Automatización</h3>
+                <p>Scripts en Python y Linux para tareas de infraestructura y monitoreo de redes.</p>
+            </div>
+        </div>
     </section>
 
-    <section>
-        <h2>Proyectos</h2>
-        <p>Automatización de infraestructura y monitoreo de redes.</p>
-        <a href="https://github.com/EmmaBia93/UbiBatch">
-            Proyecto UbiBatch
-        </a>
+    <!-- HABILIDADES -->
+    <section id="habilidades" class="reveal">
+        <span class="eyebrow">Habilidades</span>
+        <h2>Stack técnico</h2>
+        <p class="sub">Herramientas con las que trabajo a diario.</p>
+        <div class="grid">
+            <div class="card skill-group">
+                <h3>Redes y telecomunicaciones</h3>
+                <div class="tags">
+                    <span class="tag">MikroTik</span><span class="tag">Cisco</span><span class="tag">Ubiquiti</span>
+                    <span class="tag">Routing</span><span class="tag">Switching</span><span class="tag">VLAN</span>
+                    <span class="tag">eBGP</span><span class="tag">FTTH</span><span class="tag">OLT ZTE</span><span class="tag">OLT Ubiquiti</span>
+                </div>
+            </div>
+            <div class="card skill-group">
+                <h3>Sistemas y automatización</h3>
+                <div class="tags">
+                    <span class="tag">Linux avanzado</span><span class="tag">Python</span><span class="tag">Bash</span>
+                    <span class="tag">VMware</span>
+                </div>
+            </div>
+            <div class="card skill-group">
+                <h3>Desarrollo y datos</h3>
+                <div class="tags">
+                    <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Hibernate</span>
+                    <span class="tag">SQL</span><span class="tag">MongoDB</span>
+                </div>
+            </div>
+            <div class="card skill-group">
+                <h3>Idiomas</h3>
+                <div class="tags">
+                    <span class="tag">Español nativo</span><span class="tag">Inglés técnico (intermedio)</span>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section>
-        <h2>Contacto</h2>
-        <p>San Juan, Argentina</p>
-        <p>Agregá aquí tu correo profesional.</p>
+    <!-- EXPERIENCIA -->
+    <section id="experiencia" class="reveal">
+        <span class="eyebrow">Experiencia</span>
+        <h2>Trayectoria profesional</h2>
+        <p class="sub">Del soporte técnico a la administración de redes.</p>
+        <div class="timeline">
+            <div class="item">
+                <div class="when">2021 – 2026</div>
+                <h3>Técnico en Electrónica y Telecomunicaciones / Administrador de Redes</h3>
+                <div class="where">Ciudad Internet · San Juan</div>
+                <ul>
+                    <li>Administración de la red del ISP con equipos MikroTik, Cisco y Ubiquiti.</li>
+                    <li>Gestión de OLT ZTE y Ubiquiti y despliegue de fibra óptica.</li>
+                    <li>Automatización de tareas de infraestructura con Python.</li>
+                </ul>
+            </div>
+            <div class="item">
+                <div class="when">2025 – 2026</div>
+                <h3>Soporte Técnico IT</h3>
+                <div class="where">Axion Energy · Axion Media Agua</div>
+                <ul>
+                    <li>Soporte de una red segmentada de videovigilancia IP.</li>
+                    <li>Equipamiento Hikvision, MikroTik y switches TP-Link.</li>
+                </ul>
+            </div>
+            <div class="item">
+                <div class="when">2015 – 2021</div>
+                <h3>Técnico de Soporte e Infraestructura</h3>
+                <div class="where">MicroInformática</div>
+                <ul>
+                    <li>Soporte técnico, mantenimiento y puesta en marcha de infraestructura.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos" class="reveal">
+        <span class="eyebrow">Proyectos</span>
+        <h2>Cosas que construí</h2>
+        <p class="sub">Herramientas y laboratorios que desarrollo para aprender y resolver problemas reales.</p>
+        <div class="grid">
+            <div class="card">
+                <div class="ico">🚀</div>
+                <h3>UbiBatch</h3>
+                <p>Automatización de infraestructura y monitoreo de redes.</p>
+                <div class="tags"><span class="tag">Automatización</span><span class="tag">Redes</span></div>
+                <p style="margin-top:16px"><a class="btn ghost" href="https://github.com/EmmaBia93/UbiBatch" target="_blank" rel="noopener">Ver en GitHub →</a></p>
+            </div>
+            <div class="card">
+                <div class="ico">🎫</div>
+                <h3>Seguimiento de tickets para ISP</h3>
+                <p>Programa en Java para gestionar tickets de un proveedor de internet: cliente, domicilio, GPS, motivo, teléfono, estados y prioridad.</p>
+                <div class="tags"><span class="tag">Java</span><span class="tag">ISP</span></div>
+            </div>
+            <div class="card">
+                <div class="ico">🧪</div>
+                <h3>Laboratorio eBGP</h3>
+                <p>Práctica de enrutamiento eBGP con tres routers MikroTik para simular escenarios de redes.</p>
+                <div class="tags"><span class="tag">BGP</span><span class="tag">MikroTik</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMACION -->
+    <section class="reveal">
+        <span class="eyebrow">Formación</span>
+        <h2>Educación y aprendizaje continuo</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Universidad Nacional de San Juan</h3>
+                <p>Ciencias de la Computación (2 años) y Bioingeniería (3 años) cursados.</p>
+            </div>
+            <div class="card">
+                <h3>En formación</h3>
+                <p>Networking, ciberseguridad, Java, Bash y Python, con foco en operaciones de red (NOC/SOC).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="reveal">
+        <div class="contact">
+            <span class="eyebrow">Contacto</span>
+            <h2>¿Trabajamos juntos?</h2>
+            <p>
+                Si necesitás alguien que cuide, mejore y automatice tu infraestructura de red, escribime.
+                Estoy en San Juan, Argentina.
+            </p>
+            <div class="cta">
+                <!-- Reemplazá por tu correo profesional -->
+                <a class="btn primary" href="mailto:TU_CORREO@dominio.com">✉️ TU_CORREO@dominio.com</a>
+                <a class="btn ghost" href="https://github.com/EmmaBia93" target="_blank" rel="noopener">GitHub</a>
+                <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+        </div>
     </section>
 </main>
+
+<footer>
+    <div class="wrap">© <span id="year"></span> Emmanuel Biazzetti · San Juan, Argentina</div>
+</footer>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Aparición suave al hacer scroll
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Fondo animado: red de nodos
+    (function () {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const c = document.getElementById('net'), ctx = c.getContext('2d');
+        let w, h, nodes;
+        function init() {
+            w = c.width = innerWidth; h = c.height = innerHeight;
+            const n = Math.min(70, Math.floor(w * h / 22000));
+            nodes = Array.from({ length: n }, () => ({
+                x: Math.random() * w, y: Math.random() * h,
+                vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35
+            }));
+        }
+        function frame() {
+            ctx.clearRect(0, 0, w, h);
+            for (const a of nodes) {
+                a.x += a.vx; a.y += a.vy;
+                if (a.x < 0 || a.x > w) a.vx *= -1;
+                if (a.y < 0 || a.y > h) a.vy *= -1;
+                ctx.beginPath(); ctx.arc(a.x, a.y, 1.8, 0, 6.283);
+                ctx.fillStyle = 'rgba(56,189,248,.8)'; ctx.fill();
+            }
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y, d = Math.hypot(dx, dy);
+                    if (d < 140) {
+                        ctx.strokeStyle = 'rgba(99,102,241,' + (1 - d / 140) * .45 + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(frame);
+        }
+        addEventListener('resize', init);
+        init(); frame();
+    })();
+</script>
 </body>
 </html>
