@@ -9,179 +9,10 @@
     <meta property="og:title" content="Emmanuel Biazzetti | Redes e Infraestructura IT">
     <meta property="og:description" content="Administración de redes, ISP, fibra óptica, videovigilancia IP y automatización. San Juan, Argentina.">
     <meta property="og:type" content="website">
-    <style>
-        :root {
-            --bg: #0b1220;
-            --bg-soft: #111a2e;
-            --card: #14203a;
-            --border: rgba(148, 163, 184, .16);
-            --text: #e8eefc;
-            --muted: #9fb0cf;
-            --accent: #38bdf8;
-            --accent-2: #6366f1;
-            --radius: 16px;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.65;
-            -webkit-font-smoothing: antialiased;
-        }
-        canvas#net {
-            position: fixed; inset: 0; width: 100%; height: 100%;
-            z-index: 0; pointer-events: none; opacity: .55;
-        }
-        .wrap { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; padding: 0 24px; }
-
-        /* NAV */
-        nav {
-            position: sticky; top: 0; z-index: 10;
-            backdrop-filter: blur(12px);
-            background: rgba(11, 18, 32, .72);
-            border-bottom: 1px solid var(--border);
-        }
-        nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-        .logo { font-weight: 800; letter-spacing: .5px; }
-        .logo span { color: var(--accent); }
-
-        nav ul { display: flex; gap: 22px; list-style: none; }
-        nav a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color .2s; }
-        nav a:hover { color: var(--accent); }
-
-        /* HERO */
-        .hero { padding: 110px 0 80px; }
-        .badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 6px 14px; border-radius: 999px;
-            border: 1px solid var(--border); background: rgba(56, 189, 248, .08);
-            color: var(--accent); font-size: 13px; font-weight: 600;
-        }
-        .badge i { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px #22c55e; }
-        h1 { font-size: clamp(40px, 7vw, 72px); line-height: 1.05; margin: 22px 0 14px; letter-spacing: -1.5px; }
-        h1 em {
-            font-style: normal;
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-        }
-        .role { font-size: clamp(16px, 2.4vw, 21px); color: var(--muted); margin-bottom: 22px; }
-        .lead { max-width: 680px; color: #c3cfe6; font-size: 17px; }
-        .cta { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; }
-        .btn {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 13px 22px; border-radius: 10px; font-weight: 600; font-size: 15px;
-            text-decoration: none; transition: transform .2s, box-shadow .2s, background .2s;
-        }
-        .btn:hover { transform: translateY(-2px); }
-        .btn.primary { background: linear-gradient(90deg, var(--accent-2), #2563eb); color: #fff; box-shadow: 0 8px 24px rgba(79, 70, 229, .35); }
-        .btn.ghost { border: 1px solid var(--border); color: var(--text); background: rgba(255, 255, 255, .03); }
-        .btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
-
-        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: 56px; }
-        .stat { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 20px; }
-        .stat b { display: block; font-size: 24px; line-height: 1.2; color: var(--accent); margin-bottom: 8px; }
-        .stat span { display: block; color: var(--muted); font-size: 13.5px; line-height: 1.55; }
-
-        /* SECTIONS */
-        section { padding: 70px 0; }
-        .eyebrow { color: var(--accent); font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
-        h2 { font-size: clamp(28px, 4vw, 38px); margin: 8px 0 14px; letter-spacing: -.5px; }
-        .sub { color: var(--muted); max-width: 620px; margin-bottom: 36px; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
-        .grid > * { min-width: 0; }
-        .card {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 26px;
-            transition: transform .25s, border-color .25s, box-shadow .25s;
-        }
-        .card:hover { transform: translateY(-4px); border-color: rgba(56, 189, 248, .5); box-shadow: 0 14px 34px rgba(0, 0, 0, .35); }
-        .card .ico { font-size: 28px; margin-bottom: 12px; }
-        .card h3 { font-size: 18px; margin-bottom: 8px; }
-        .card p { color: var(--muted); font-size: 15px; }
-        .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-        .tag {
-            font-size: 12px; padding: 4px 10px; border-radius: 999px;
-            background: rgba(99, 102, 241, .14); color: #b9bdff; border: 1px solid rgba(99, 102, 241, .3);
-        }
-        .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
-        .links .btn { padding: 10px 16px; font-size: 14px; }
-
-        /* TIMELINE */
-        .timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
-        .item { position: relative; margin-bottom: 34px; }
-        .item::before {
-            content: ""; position: absolute; left: -37px; top: 6px;
-            width: 14px; height: 14px; border-radius: 50%;
-            background: var(--accent); box-shadow: 0 0 0 4px var(--bg), 0 0 14px var(--accent);
-        }
-        .item .when { color: var(--accent); font-size: 13px; font-weight: 700; }
-        .item h3 { font-size: 20px; margin: 2px 0; }
-        .item .where { color: var(--muted); font-size: 15px; margin-bottom: 8px; }
-        .item ul { padding-left: 18px; color: #c3cfe6; font-size: 15px; }
-        .item li { margin-bottom: 4px; }
-
-        /* SKILLS */
-        .skill-group h3 { font-size: 16px; margin-bottom: 4px; }
-
-        /* CERTIFICADOS */
-        .certs { margin-top: 56px; }
-        .card.cert { padding: 0; overflow: hidden; cursor: pointer; display: block; }
-        .cert .thumb {
-            position: relative; width: 100%; height: 190px; overflow: hidden;
-            background: linear-gradient(135deg, #1b2a4d, #2a2f66);
-            display: flex; align-items: center; justify-content: center; font-size: 46px;
-        }
-        .cert .thumb img {
-            position: absolute; inset: 0; width: 100%; height: 100%;
-            max-width: 100%; object-fit: cover; object-position: center top;
-            display: block; transition: transform .4s;
-        }
-        .cert:hover .thumb img { transform: scale(1.05); }
-        .cert .thumb .fallback { display: none; }
-        .cert .thumb.noimg img { display: none; }
-        .cert .thumb.noimg .fallback { display: block; }
-        .cert .body { padding: 18px 20px 20px; }
-        .cert h3 { font-size: 17px; margin-bottom: 4px; }
-        .cert .meta { color: var(--muted); font-size: 13px; }
-        .cert .hint { margin-top: 10px; font-size: 12px; color: var(--accent); font-weight: 600; }
-        .cert:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-
-        .lightbox {
-            position: fixed; inset: 0; z-index: 50; background: rgba(5, 9, 18, .88);
-            display: none; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out;
-        }
-        .lightbox.open { display: flex; }
-        .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 12px; box-shadow: 0 20px 60px rgba(0, 0, 0, .6); }
-
-        /* CONTACT */
-        .contact {
-            text-align: center; background: linear-gradient(135deg, rgba(99, 102, 241, .22), rgba(56, 189, 248, .12));
-            border: 1px solid var(--border); border-radius: 24px; padding: 60px 24px;
-        }
-        .contact p { color: #c3cfe6; max-width: 540px; margin: 0 auto 28px; }
-        .contact .cta { justify-content: center; }
-
-        footer { padding: 36px 0 50px; text-align: center; color: var(--muted); font-size: 13px; }
-
-        /* REVEAL */
-        .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s, transform .7s; }
-        .reveal.show { opacity: 1; transform: none; }
-
-        @media (max-width: 640px) {
-            nav ul { display: none; }
-            .hero { padding: 70px 0 50px; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            .reveal { opacity: 1; transform: none; transition: none; }
-            canvas#net { display: none; }
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 <canvas id="net" aria-hidden="true"></canvas>
 
 <nav>
@@ -203,16 +34,22 @@
     <header class="hero">
         <span class="badge"><i></i> Disponible para nuevas oportunidades</span>
         <h1>Hola, soy <em>Emmanuel Biazzetti</em></h1>
-        <p class="role">NOC L2 · Administración de Redes · Infraestructura IT · Automatización</p>
+        <p class="role"><span class="role-text" id="role-text">NOC L2 · Administración de Redes · Infraestructura IT · Automatización</span></p>
         <p class="lead">
             Diseño, administro y automatizo infraestructuras de red. Más de 10 años de experiencia en soporte IT, telecomunicaciones y operación de redes ISP,
             con foco en conectividad, fibra óptica, routing, switching y videovigilancia IP.
         </p>
         <div class="cta">
-            <a class="btn primary" href="cv.pdf" target="_blank" rel="noopener">📄 Ver mi CV</a>
+            <a class="btn primary" href="assets/docs/cv.pdf" target="_blank" rel="noopener">📄 Ver mi CV</a>
             <a class="btn ghost" href="https://github.com/EmmaBia93" target="_blank" rel="noopener">GitHub</a>
             <a class="btn ghost" href="https://www.linkedin.com/in/emmabia/" target="_blank" rel="noopener">LinkedIn</a>
             <a class="btn ghost" href="#contacto">✉️ Contactar</a>
+        </div>
+
+        <!-- TERMINAL -->
+        <div class="terminal" id="terminal" title="Clic para repetir" role="img" aria-label="Simulación de una terminal: whoami, stack técnico, proyectos y ping a oportunidades">
+            <div class="term-bar"><i></i><i></i><i></i><span class="term-title">emmanuel@noc: ~</span></div>
+            <div class="term-body" id="term-body" aria-hidden="true"></div>
         </div>
 
         <div class="stats">
@@ -341,7 +178,7 @@
             <div class="card">
                 <div class="ico">🚀</div>
                 <h3>AirPulse</h3>
-                <p>Herramienta de gestión y monitoreo de dispositivos Ubiquiti desarrollada en Python y PySide6. 
+                <p>Herramienta de gestión y monitoreo de dispositivos Ubiquiti desarrollada en Python y PySide6.
                    Busca simplificar las tareas de administración y supervisión de equipos de infraestructura de red mediante una interfaz gráfica.</p>
                 <div class="tags"><span class="tag">Automatización</span><span class="tag">Redes</span></div>
                 <div class="links">
@@ -390,40 +227,40 @@
             <span class="eyebrow">Cursos y certificaciones</span>
             <h2 style="margin-bottom:24px">Certificados</h2>
             <div class="grid">
-                <div class="card cert" role="button" tabindex="0" data-img="certificados/mikrotik.jpeg">
-                    <div class="thumb"><img src="certificados/mikrotik.jpeg" alt="Certificado MikroTik" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🌐</span></div>
+                <div class="card cert" role="button" tabindex="0" data-img="assets/img/certificados/mikrotik.jpeg">
+                    <div class="thumb"><img src="assets/img/certificados/mikrotik.jpeg" alt="Certificado MikroTik" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🌐</span></div>
                     <div class="body">
                         <h3>MikroTik</h3>
                         <div class="meta">EducaciónIT · 24 h · Febrero 2025</div>
                         <div class="hint">Ver certificado →</div>
                     </div>
                 </div>
-                <div class="card cert" role="button" tabindex="0" data-img="certificados/intro-hacking.jpeg">
-                    <div class="thumb"><img src="certificados/intro-hacking.jpeg" alt="Certificado Introducción al Hacking" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🛡️</span></div>
+                <div class="card cert" role="button" tabindex="0" data-img="assets/img/certificados/intro-hacking.jpeg">
+                    <div class="thumb"><img src="assets/img/certificados/intro-hacking.jpeg" alt="Certificado Introducción al Hacking" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🛡️</span></div>
                     <div class="body">
                         <h3>Introducción al Hacking</h3>
                         <div class="meta">Hack4u · 53 h · Diciembre 2023</div>
                         <div class="hint">Ver certificado →</div>
                     </div>
                 </div>
-                <div class="card cert" role="button" tabindex="0" data-img="certificados/python-ofensivo.jpeg">
-                    <div class="thumb"><img src="certificados/python-ofensivo.jpeg" alt="Certificado Python Ofensivo" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🐍</span></div>
+                <div class="card cert" role="button" tabindex="0" data-img="assets/img/certificados/python-ofensivo.jpeg">
+                    <div class="thumb"><img src="assets/img/certificados/python-ofensivo.jpeg" alt="Certificado Python Ofensivo" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🐍</span></div>
                     <div class="body">
                         <h3>Python Ofensivo</h3>
                         <div class="meta">Hack4u · 35 h · Diciembre 2023</div>
                         <div class="hint">Ver certificado →</div>
                     </div>
                 </div>
-                <div class="card cert" role="button" tabindex="0" data-img="certificados/intro-linux.jpeg">
-                    <div class="thumb"><img src="certificados/intro-linux.jpeg" alt="Certificado Introducción a Linux" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🐧</span></div>
+                <div class="card cert" role="button" tabindex="0" data-img="assets/img/certificados/intro-linux.jpeg">
+                    <div class="thumb"><img src="assets/img/certificados/intro-linux.jpeg" alt="Certificado Introducción a Linux" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🐧</span></div>
                     <div class="body">
                         <h3>Introducción a Linux</h3>
                         <div class="meta">Hack4u · 15 h · Junio 2023</div>
                         <div class="hint">Ver certificado →</div>
                     </div>
                 </div>
-                <div class="card cert" role="button" tabindex="0" data-img="certificados/personalizacion-linux.jpeg">
-                    <div class="thumb"><img src="certificados/personalizacion-linux.jpeg" alt="Certificado Personalización de Linux" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🖥️</span></div>
+                <div class="card cert" role="button" tabindex="0" data-img="assets/img/certificados/personalizacion-linux.jpeg">
+                    <div class="thumb"><img src="assets/img/certificados/personalizacion-linux.jpeg" alt="Certificado Personalización de Linux" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🖥️</span></div>
                     <div class="body">
                         <h3>Personalización de Linux</h3>
                         <div class="meta">Hack4u · Junio 2023</div>
@@ -459,71 +296,12 @@
     <div class="wrap">© <span id="year"></span> Emmanuel Biazzetti · San Juan, Argentina</div>
 </footer>
 
-<script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Aparición suave al hacer scroll
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
-    }, { threshold: .12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-    // Visor de certificados
-    (function () {
-        const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lightbox-img');
-        if (!lb || !lbImg) return;
-        function open(card) {
-            if (card.querySelector('.thumb').classList.contains('noimg')) return;
-            lbImg.src = card.dataset.img;
-            lb.classList.add('open');
-        }
-        document.querySelectorAll('.cert').forEach(card => {
-            card.addEventListener('click', () => open(card));
-            card.addEventListener('keydown', e => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(card); }
-            });
-        });
-        lb.addEventListener('click', () => lb.classList.remove('open'));
-        addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
-    })();
-
-    // Fondo animado: red de nodos
-    (function () {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        const c = document.getElementById('net'), ctx = c.getContext('2d');
-        let w, h, nodes;
-        function init() {
-            w = c.width = innerWidth; h = c.height = innerHeight;
-            const n = Math.min(70, Math.floor(w * h / 22000));
-            nodes = Array.from({ length: n }, () => ({
-                x: Math.random() * w, y: Math.random() * h,
-                vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35
-            }));
-        }
-        function frame() {
-            ctx.clearRect(0, 0, w, h);
-            for (const a of nodes) {
-                a.x += a.vx; a.y += a.vy;
-                if (a.x < 0 || a.x > w) a.vx *= -1;
-                if (a.y < 0 || a.y > h) a.vy *= -1;
-                ctx.beginPath(); ctx.arc(a.x, a.y, 1.8, 0, 6.283);
-                ctx.fillStyle = 'rgba(56,189,248,.8)'; ctx.fill();
-            }
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y, d = Math.hypot(dx, dy);
-                    if (d < 140) {
-                        ctx.strokeStyle = 'rgba(99,102,241,' + (1 - d / 140) * .45 + ')';
-                        ctx.lineWidth = 1;
-                        ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(frame);
-        }
-        addEventListener('resize', init);
-        init(); frame();
-    })();
-</script>
+<script src="js/network.js" defer></script>
+<script src="js/lightbox.js" defer></script>
+<script src="js/terminal.js" defer></script>
+<script src="js/roles.js" defer></script>
+<script src="js/spotlight.js" defer></script>
+<script src="js/scroll.js" defer></script>
+<script src="js/main.js" defer></script>
 </body>
 </html>
