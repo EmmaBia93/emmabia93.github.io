@@ -66,7 +66,7 @@
             -webkit-background-clip: text; background-clip: text; color: transparent;
         }
         .role { font-size: clamp(16px, 2.4vw, 21px); color: var(--muted); margin-bottom: 22px; }
-        .lead { max-width: 640px; color: #c3cfe6; font-size: 17px; }
+        .lead { max-width: 680px; color: #c3cfe6; font-size: 17px; }
         .cta { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; }
         .btn {
             display: inline-flex; align-items: center; gap: 8px;
@@ -78,10 +78,10 @@
         .btn.ghost { border: 1px solid var(--border); color: var(--text); background: rgba(255, 255, 255, .03); }
         .btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
 
-        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-top: 56px; }
-        .stat { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
-        .stat b { display: block; font-size: 30px; color: var(--accent); }
-        .stat span { color: var(--muted); font-size: 14px; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: 56px; }
+        .stat { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 20px; }
+        .stat b { display: block; font-size: 24px; line-height: 1.2; color: var(--accent); margin-bottom: 8px; }
+        .stat span { display: block; color: var(--muted); font-size: 13.5px; line-height: 1.55; }
 
         /* SECTIONS */
         section { padding: 70px 0; }
@@ -90,6 +90,7 @@
         .sub { color: var(--muted); max-width: 620px; margin-bottom: 36px; }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+        .grid > * { min-width: 0; }
         .card {
             background: var(--card); border: 1px solid var(--border);
             border-radius: var(--radius); padding: 26px;
@@ -104,6 +105,8 @@
             font-size: 12px; padding: 4px 10px; border-radius: 999px;
             background: rgba(99, 102, 241, .14); color: #b9bdff; border: 1px solid rgba(99, 102, 241, .3);
         }
+        .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+        .links .btn { padding: 10px 16px; font-size: 14px; }
 
         /* TIMELINE */
         .timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
@@ -121,6 +124,36 @@
 
         /* SKILLS */
         .skill-group h3 { font-size: 16px; margin-bottom: 4px; }
+
+        /* CERTIFICADOS */
+        .certs { margin-top: 56px; }
+        .card.cert { padding: 0; overflow: hidden; cursor: pointer; display: block; }
+        .cert .thumb {
+            position: relative; width: 100%; height: 190px; overflow: hidden;
+            background: linear-gradient(135deg, #1b2a4d, #2a2f66);
+            display: flex; align-items: center; justify-content: center; font-size: 46px;
+        }
+        .cert .thumb img {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            max-width: 100%; object-fit: cover; object-position: center top;
+            display: block; transition: transform .4s;
+        }
+        .cert:hover .thumb img { transform: scale(1.05); }
+        .cert .thumb .fallback { display: none; }
+        .cert .thumb.noimg img { display: none; }
+        .cert .thumb.noimg .fallback { display: block; }
+        .cert .body { padding: 18px 20px 20px; }
+        .cert h3 { font-size: 17px; margin-bottom: 4px; }
+        .cert .meta { color: var(--muted); font-size: 13px; }
+        .cert .hint { margin-top: 10px; font-size: 12px; color: var(--accent); font-weight: 600; }
+        .cert:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+        .lightbox {
+            position: fixed; inset: 0; z-index: 50; background: rgba(5, 9, 18, .88);
+            display: none; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out;
+        }
+        .lightbox.open { display: flex; }
+        .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 12px; box-shadow: 0 20px 60px rgba(0, 0, 0, .6); }
 
         /* CONTACT */
         .contact {
@@ -169,23 +202,23 @@
     <header class="hero">
         <span class="badge"><i></i> Disponible para nuevas oportunidades</span>
         <h1>Hola, soy <em>Emmanuel Biazzetti</em></h1>
-        <p class="role">Telecomunicaciones · Administración de Redes · Infraestructura IT · Automatización</p>
+        <p class="role">NOC L2 · Administración de Redes · Infraestructura IT · Automatización</p>
         <p class="lead">
-            Diseño, opero y automatizo redes. Más de 10 años resolviendo problemas de infraestructura,
-            desde el soporte técnico hasta redes de ISP con fibra óptica y sistemas de videovigilancia IP segmentados.
+            Diseño, administro y automatizo infraestructuras de red. Más de 10 años de experiencia en soporte IT, telecomunicaciones y operación de redes ISP,
+            con foco en conectividad, fibra óptica, routing, switching y videovigilancia IP.
         </p>
         <div class="cta">
             <a class="btn primary" href="cv.pdf" target="_blank" rel="noopener">📄 Ver mi CV</a>
             <a class="btn ghost" href="https://github.com/EmmaBia93" target="_blank" rel="noopener">GitHub</a>
-            <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn ghost" href="https://www.linkedin.com/in/emmabia/" target="_blank" rel="noopener">LinkedIn</a>
             <a class="btn ghost" href="#contacto">✉️ Contactar</a>
         </div>
 
         <div class="stats">
-            <div class="stat"><b>10+</b><span>años en soporte e infraestructura</span></div>
-            <div class="stat"><b>ISP</b><span>fibra óptica, OLT y routing</span></div>
-            <div class="stat"><b>IP CCTV</b><span>redes segmentadas de videovigilancia</span></div>
-            <div class="stat"><b>Python</b><span>automatización y monitoreo</span></div>
+            <div class="stat"><b>10+</b><span>años de experiencia en soporte IT, telecomunicaciones y administración de infraestructura tecnológica</span></div>
+            <div class="stat"><b>Network Operations</b><span>Monitoreo, administración y troubleshooting de redes ISP, routing, switching y disponibilidad de infraestructura.</span></div>
+            <div class="stat"><b>IP CCTV</b><span>Redes segmentadas de videovigilancia IP, configuración de cámaras, NVR y switches administrables, con foco en conectividad y disponibilidad del sistema.</span></div>
+            <div class="stat"><b>Linux &amp; Scripting</b><span>Manejo de entornos Linux, scripting con Bash y Python, desarrollo de herramientas para automatización de tareas, monitoreo de infraestructura y diagnóstico de redes.</span></div>
         </div>
     </header>
 
@@ -232,23 +265,25 @@
             <div class="card skill-group">
                 <h3>Redes y telecomunicaciones</h3>
                 <div class="tags">
-                    <span class="tag">MikroTik</span><span class="tag">Cisco</span><span class="tag">Ubiquiti</span>
-                    <span class="tag">Routing</span><span class="tag">Switching</span><span class="tag">VLAN</span>
-                    <span class="tag">eBGP</span><span class="tag">FTTH</span><span class="tag">OLT ZTE</span><span class="tag">OLT Ubiquiti</span>
+                    <span class="tag">MikroTik</span><span class="tag">Cisco</span><span class="tag">Ubiquiti</span><span class="tag">ZTE</span>
+                    <span class="tag">Routing</span><span class="tag">Switching</span><span class="tag">VPN</span><span class="tag">VLAN</span>
+                    <span class="tag">BGP | eBGP</span><span class="tag">OSPF</span><span class="tag">FTTH | GPON</span><span class="tag">Firewall</span>
+                    <span class="tag">Troubleshooting</span>
                 </div>
             </div>
             <div class="card skill-group">
                 <h3>Sistemas y automatización</h3>
                 <div class="tags">
                     <span class="tag">Linux avanzado</span><span class="tag">Python</span><span class="tag">Bash</span>
-                    <span class="tag">VMware</span>
+                    <span class="tag">VMware</span><span class="tag">Administración de servidores</span><span class="tag">Grafana</span>
+                    <span class="tag">Zabbix</span><span class="tag">Docker</span>
                 </div>
             </div>
             <div class="card skill-group">
                 <h3>Desarrollo y datos</h3>
                 <div class="tags">
-                    <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Hibernate</span>
-                    <span class="tag">SQL</span><span class="tag">MongoDB</span>
+                    <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Hibernate | JPA</span>
+                    <span class="tag">SQL</span><span class="tag">Git</span><span class="tag">REST API</span><span class="tag">Python</span>
                 </div>
             </div>
             <div class="card skill-group">
@@ -307,19 +342,28 @@
                 <h3>UbiBatch</h3>
                 <p>Automatización de infraestructura y monitoreo de redes.</p>
                 <div class="tags"><span class="tag">Automatización</span><span class="tag">Redes</span></div>
-                <p style="margin-top:16px"><a class="btn ghost" href="https://github.com/EmmaBia93/UbiBatch" target="_blank" rel="noopener">Ver en GitHub →</a></p>
+                <div class="links">
+                    <a class="btn ghost" href="https://github.com/EmmaBia93/UbiBatch" target="_blank" rel="noopener">Ver en GitHub →</a>
+                </div>
             </div>
             <div class="card">
-                <div class="ico">🎫</div>
-                <h3>Seguimiento de tickets para ISP</h3>
-                <p>Programa en Java para gestionar tickets de un proveedor de internet: cliente, domicilio, GPS, motivo, teléfono, estados y prioridad.</p>
-                <div class="tags"><span class="tag">Java</span><span class="tag">ISP</span></div>
+                <div class="ico">💵</div>
+                <h3>CashFlow</h3>
+                <p>Aplicación en Python para automatizar cierres de caja, conciliar pagos de Wisphub y detectar diferencias en la recaudación.</p>
+                <div class="tags"><span class="tag">Python</span><span class="tag">ISP</span></div>
+                <div class="links">
+                    <a class="btn ghost" href="https://github.com/EmmaBia93/CashFlow" target="_blank" rel="noopener">Ver en GitHub →</a>
+                </div>
             </div>
             <div class="card">
-                <div class="ico">🧪</div>
-                <h3>Laboratorio eBGP</h3>
-                <p>Práctica de enrutamiento eBGP con tres routers MikroTik para simular escenarios de redes.</p>
-                <div class="tags"><span class="tag">BGP</span><span class="tag">MikroTik</span></div>
+                <div class="ico">📡</div>
+                <h3>Automatización Ubiquiti</h3>
+                <p>Herramientas en Python y Batch para automatizar tareas de gestión, monitoreo y mantenimiento de equipos Ubiquiti.</p>
+                <div class="tags"><span class="tag">Python</span><span class="tag">Batch</span><span class="tag">Ubiquiti</span></div>
+                <div class="links">
+                    <a class="btn ghost" href="https://github.com/EmmaBia93/PyScript" target="_blank" rel="noopener">Ver en GitHub PY →</a>
+                    <a class="btn ghost" href="https://github.com/EmmaBia93/UbiBatch" target="_blank" rel="noopener">Ver en GitHub BATCH →</a>
+                </div>
             </div>
         </div>
     </section>
@@ -331,11 +375,59 @@
         <div class="grid">
             <div class="card">
                 <h3>Universidad Nacional de San Juan</h3>
-                <p>Ciencias de la Computación (2 años) y Bioingeniería (3 años) cursados.</p>
+                <p>Cursé 2 años de Ciencias de la Computación y 3 años de Bioingeniería, con base en programación, matemática y electrónica.</p>
             </div>
             <div class="card">
                 <h3>En formación</h3>
                 <p>Networking, ciberseguridad, Java, Bash y Python, con foco en operaciones de red (NOC/SOC).</p>
+            </div>
+        </div>
+
+        <!-- CERTIFICACIONES -->
+        <div class="certs">
+            <span class="eyebrow">Cursos y certificaciones</span>
+            <h2 style="margin-bottom:24px">Certificados</h2>
+            <div class="grid">
+                <div class="card cert" role="button" tabindex="0" data-img="certificados/mikrotik.jpeg">
+                    <div class="thumb"><img src="certificados/mikrotik.jpeg" alt="Certificado MikroTik" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🌐</span></div>
+                    <div class="body">
+                        <h3>MikroTik</h3>
+                        <div class="meta">EducaciónIT · 24 h · Febrero 2025</div>
+                        <div class="hint">Ver certificado →</div>
+                    </div>
+                </div>
+                <div class="card cert" role="button" tabindex="0" data-img="certificados/intro-hacking.jpeg">
+                    <div class="thumb"><img src="certificados/intro-hacking.jpeg" alt="Certificado Introducción al Hacking" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🛡️</span></div>
+                    <div class="body">
+                        <h3>Introducción al Hacking</h3>
+                        <div class="meta">Hack4u · 53 h · Diciembre 2023</div>
+                        <div class="hint">Ver certificado →</div>
+                    </div>
+                </div>
+                <div class="card cert" role="button" tabindex="0" data-img="certificados/python-ofensivo.jpeg">
+                    <div class="thumb"><img src="certificados/python-ofensivo.jpeg" alt="Certificado Python Ofensivo" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🐍</span></div>
+                    <div class="body">
+                        <h3>Python Ofensivo</h3>
+                        <div class="meta">Hack4u · 35 h · Diciembre 2023</div>
+                        <div class="hint">Ver certificado →</div>
+                    </div>
+                </div>
+                <div class="card cert" role="button" tabindex="0" data-img="certificados/intro-linux.jpeg">
+                    <div class="thumb"><img src="certificados/intro-linux.jpeg" alt="Certificado Introducción a Linux" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🐧</span></div>
+                    <div class="body">
+                        <h3>Introducción a Linux</h3>
+                        <div class="meta">Hack4u · 15 h · Junio 2023</div>
+                        <div class="hint">Ver certificado →</div>
+                    </div>
+                </div>
+                <div class="card cert" role="button" tabindex="0" data-img="certificados/personalizacion-linux.jpeg">
+                    <div class="thumb"><img src="certificados/personalizacion-linux.jpeg" alt="Certificado Personalización de Linux" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🖥️</span></div>
+                    <div class="body">
+                        <h3>Personalización de Linux</h3>
+                        <div class="meta">Hack4u · Junio 2023</div>
+                        <div class="hint">Ver certificado →</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -350,14 +442,16 @@
                 Estoy en San Juan, Argentina.
             </p>
             <div class="cta">
-                <!-- Reemplazá por tu correo profesional -->
-                <a class="btn primary" href="mailto:TU_CORREO@dominio.com">✉️ TU_CORREO@dominio.com</a>
+                <a class="btn primary" href="mailto:emmabia2013@gmail.com">✉️ emmabia2013@gmail.com</a>
                 <a class="btn ghost" href="https://github.com/EmmaBia93" target="_blank" rel="noopener">GitHub</a>
-                <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+                <a class="btn ghost" href="https://www.linkedin.com/in/emmabia/" target="_blank" rel="noopener">LinkedIn</a>
             </div>
         </div>
     </section>
 </main>
+
+<!-- Visor de certificados -->
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Certificado ampliado"><img id="lightbox-img" alt=""></div>
 
 <footer>
     <div class="wrap">© <span id="year"></span> Emmanuel Biazzetti · San Juan, Argentina</div>
@@ -371,6 +465,25 @@
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
     }, { threshold: .12 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Visor de certificados
+    (function () {
+        const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lightbox-img');
+        if (!lb || !lbImg) return;
+        function open(card) {
+            if (card.querySelector('.thumb').classList.contains('noimg')) return;
+            lbImg.src = card.dataset.img;
+            lb.classList.add('open');
+        }
+        document.querySelectorAll('.cert').forEach(card => {
+            card.addEventListener('click', () => open(card));
+            card.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(card); }
+            });
+        });
+        lb.addEventListener('click', () => lb.classList.remove('open'));
+        addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+    })();
 
     // Fondo animado: red de nodos
     (function () {
