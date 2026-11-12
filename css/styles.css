@@ -161,7 +161,7 @@ footer { padding: 36px 0 50px; text-align: center; color: var(--muted); font-siz
     background: rgba(8, 13, 24, .86); backdrop-filter: blur(6px);
     box-shadow: 0 20px 50px rgba(0, 0, 0, .45);
     font-family: "JetBrains Mono", "Fira Code", Consolas, "SF Mono", Menlo, monospace;
-    cursor: pointer;
+    cursor: text;
 }
 .term-bar {
     display: flex; align-items: center; gap: 7px; padding: 11px 14px;
@@ -173,9 +173,26 @@ footer { padding: 36px 0 50px; text-align: center; color: var(--muted); font-siz
 .term-bar i:nth-child(3) { background: #27c93f; }
 .term-title { margin-left: 8px; font-size: 12px; color: var(--muted); }
 .term-body {
-    padding: 18px 20px 20px; min-height: 380px;
+    height: 440px; overflow-y: auto; overflow-x: hidden;
+    scrollbar-width: thin; scrollbar-color: rgba(148, 163, 184, .3) transparent;
+    padding: 18px 20px 20px;
     font-size: 13.5px; line-height: 1.7; color: #c9d6ee;
 }
+.terminal:focus-within { border-color: rgba(56, 189, 248, .45); }
+
+/* línea de comandos interactiva */
+.t-prompt { display: flex; align-items: baseline; }
+.t-prompt > * { flex: none; }
+.t-prompt .t-cmd { flex: 1 1 auto; min-width: 0; margin-left: 1ch; }
+.t-prompt.is-busy { opacity: 0; }
+.t-input {
+    flex: 1 1 auto; min-width: 0; margin-left: 1ch; padding: 0;
+    background: transparent; border: 0; outline: 0; color: inherit;
+    font: inherit; caret-color: var(--accent);
+}
+.t-input::placeholder { color: var(--muted); opacity: .65; }
+.t-link { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.t-err { color: #f87171; }
 .t-line { white-space: pre-wrap; word-break: break-word; }
 .t-user { color: #22c55e; font-weight: 700; }
 .t-path { color: var(--accent); }
@@ -191,7 +208,8 @@ footer { padding: 36px 0 50px; text-align: center; color: var(--muted); font-siz
 @keyframes blink { 50% { opacity: 0; } }
 
 @media (max-width: 640px) {
-    .term-body { font-size: 12px; padding: 14px; min-height: 340px; }
+    .term-body { font-size: 12px; padding: 14px; height: 400px; }
+    .t-input { font-size: 16px; } /* 16px evita que iOS haga zoom al enfocar el campo */
 }
 
 /* ROLES ROTATIVOS (fundido) */
