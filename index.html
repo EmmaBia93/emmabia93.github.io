@@ -114,7 +114,7 @@
                 <div class="tags">
                     <span class="tag">Linux avanzado</span><span class="tag">Python</span><span class="tag">Bash</span>
                     <span class="tag">VMware</span><span class="tag">Administración de servidores</span><span class="tag">Grafana</span>
-                    <span class="tag">Zabbix</span><span class="tag">Docker</span>
+                    <span class="tag">Zabbix</span><span class="tag">Proxmox VE</span><span class="tag">Active Directory</span>
                 </div>
             </div>
             <div class="card skill-group">
@@ -122,6 +122,7 @@
                 <div class="tags">
                     <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Hibernate | JPA</span>
                     <span class="tag">SQL</span><span class="tag">Git</span><span class="tag">REST API</span><span class="tag">Python</span>
+                    <span class="tag">Bash</span>
                 </div>
             </div>
             <div class="card skill-group">
@@ -211,13 +212,13 @@
     <section id="calculadora" class="reveal">
         <span class="eyebrow">Herramienta</span>
         <h2>Calculadora de subredes</h2>
-        <p class="sub">Escribí una IP con su máscara, como <code>192.168.10.0/26</code> o <code>192.168.10.0 255.255.255.192</code>, y te muestro la red, el broadcast, el rango de hosts y más. Se calcula en tu navegador. También está en la terminal: probá <code>ipcalc</code>.</p>
+        <p class="sub">Escribí una IP con su máscara, como <code>192.168.10.0/26</code> o <code>192.168.10.0 255.255.255.192</code>, y te muestro la red, el broadcast, el rango de hosts y más. Se calcula en tu navegador.</p>
         <div class="card" id="subnet-tool">
             <form class="sn-form" id="sn-form" autocomplete="off" novalidate>
                 <label class="sr-only" for="sn-input">IP con su máscara o prefijo</label>
-                <input id="sn-input" type="text" value="192.168.10.0/26" maxlength="40" spellcheck="false" autocapitalize="off" autocorrect="off" placeholder="192.168.10.0/26">
+                <input id="sn-input" type="text" value="192.168.1.0/24" maxlength="40" spellcheck="false" autocapitalize="off" autocorrect="off" placeholder="192.168.1.0/24">
                 <div class="sn-examples">
-                    <button type="button" class="sn-chip" data-v="192.168.10.0/26">192.168.10.0/26</button>
+                    <button type="button" class="sn-chip" data-v="192.168.1.0/24">192.168.1.0/24</button>
                     <button type="button" class="sn-chip" data-v="10.0.0.0/8">10.0.0.0/8</button>
                     <button type="button" class="sn-chip" data-v="172.16.5.130 255.255.255.224">172.16.5.130 255.255.255.224</button>
                     <button type="button" class="sn-chip" data-v="192.168.1.1/30">192.168.1.1/30</button>
