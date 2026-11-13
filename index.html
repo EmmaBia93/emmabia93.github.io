@@ -207,6 +207,27 @@
         </div>
     </section>
 
+    <!-- CALCULADORA DE SUBREDES -->
+    <section id="calculadora" class="reveal">
+        <span class="eyebrow">Herramienta</span>
+        <h2>Calculadora de subredes</h2>
+        <p class="sub">Escribí una IP con su máscara, como <code>192.168.10.0/26</code> o <code>192.168.10.0 255.255.255.192</code>, y te muestro la red, el broadcast, el rango de hosts y más. Se calcula en tu navegador. También está en la terminal: probá <code>ipcalc</code>.</p>
+        <div class="card" id="subnet-tool">
+            <form class="sn-form" id="sn-form" autocomplete="off" novalidate>
+                <label class="sr-only" for="sn-input">IP con su máscara o prefijo</label>
+                <input id="sn-input" type="text" value="192.168.10.0/26" maxlength="40" spellcheck="false" autocapitalize="off" autocorrect="off" placeholder="192.168.10.0/26">
+                <div class="sn-examples">
+                    <button type="button" class="sn-chip" data-v="192.168.10.0/26">192.168.10.0/26</button>
+                    <button type="button" class="sn-chip" data-v="10.0.0.0/8">10.0.0.0/8</button>
+                    <button type="button" class="sn-chip" data-v="172.16.5.130 255.255.255.224">172.16.5.130 255.255.255.224</button>
+                    <button type="button" class="sn-chip" data-v="192.168.1.1/30">192.168.1.1/30</button>
+                    <button type="button" class="sn-chip" data-v="10.10.10.0/31">10.10.10.0/31</button>
+                </div>
+            </form>
+            <div id="sn-result" aria-live="polite"></div>
+        </div>
+    </section>
+
     <!-- FORMACION -->
     <section class="reveal">
         <span class="eyebrow">Formación</span>
@@ -271,6 +292,34 @@
         </div>
     </section>
 
+    <!-- TU NAVEGADOR -->
+    <section id="tu-navegador" class="reveal">
+        <span class="eyebrow">Privacidad</span>
+        <h2>Lo que tu navegador cuenta sin que se lo pidas</h2>
+        <p class="sub">Cualquier página puede leer esto apenas la abrís, sin permisos ni cookies. Acá se calcula en tu propio navegador y no se envía ni se guarda en ningún lado.</p>
+        <div class="card">
+            <dl class="kv">
+                <div><dt>Navegador</dt><dd data-k="browser">—</dd></div>
+                <div><dt>Sistema</dt><dd data-k="os">—</dd></div>
+                <div><dt>Idioma</dt><dd data-k="lang">—</dd></div>
+                <div><dt>Zona horaria</dt><dd data-k="tz">—</dd></div>
+                <div><dt>Pantalla</dt><dd data-k="screen">—</dd></div>
+                <div><dt>Ventana</dt><dd data-k="viewport">—</dd></div>
+                <div><dt>Procesador</dt><dd data-k="cores">—</dd></div>
+                <div><dt>Memoria</dt><dd data-k="memory">—</dd></div>
+                <div><dt>Conexión</dt><dd data-k="connection">—</dd></div>
+                <div><dt>Tema preferido</dt><dd data-k="theme">—</dd></div>
+                <div><dt>Señal de privacidad</dt><dd data-k="privacy">—</dd></div>
+                <div><dt>Entrada</dt><dd data-k="input">—</dd></div>
+            </dl>
+            <div class="fp">
+                <span>Huella aproximada</span>
+                <b data-k="fp">--------</b>
+                <p>Combinados, estos datos pueden hacer que tu navegador sea bastante distinguible entre miles. Esa técnica se llama <em>fingerprinting</em> y es una de las razones por las que la privacidad en la web no se resuelve solo borrando cookies. Tu IP pública no aparece acá: para verla tenés que pedirla con <code>myip</code> en la terminal de arriba.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- CONTACTO -->
     <section id="contacto" class="reveal">
         <div class="contact">
@@ -293,15 +342,25 @@
 <div class="lightbox" id="lightbox" role="dialog" aria-label="Certificado ampliado"><img id="lightbox-img" alt=""></div>
 
 <footer>
-    <div class="wrap">© <span id="year"></span> Emmanuel Biazzetti · San Juan, Argentina</div>
+    <div class="wrap">
+        © <span id="year"></span> Emmanuel Biazzetti · San Juan, Argentina
+        <div class="visits" id="visit-counter" hidden><i></i>Visitas: <b id="visit-count">0</b></div>
+    </div>
 </footer>
 
 <script src="js/network.js" defer></script>
 <script src="js/lightbox.js" defer></script>
+<script src="js/browser-info.js" defer></script>
+<script src="js/subnet.js" defer></script>
 <script src="js/terminal.js" defer></script>
 <script src="js/roles.js" defer></script>
 <script src="js/spotlight.js" defer></script>
 <script src="js/scroll.js" defer></script>
+<script src="js/console.js" defer></script>
 <script src="js/main.js" defer></script>
+
+<!-- Contador de visitas (GoatCounter): reemplazá TU-CODIGO por el código de tu sitio -->
+<script data-goatcounter="https://TU-CODIGO.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script src="js/visits.js" defer></script>
 </body>
 </html>
