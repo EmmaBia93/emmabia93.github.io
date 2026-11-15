@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,7 +15,7 @@
 <body>
 <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 <canvas id="net" aria-hidden="true"></canvas>
-
+ 
 <nav>
     <div class="wrap">
         <div class="logo">EB<span> | </span>Network & Software</div>
@@ -23,13 +24,14 @@
             <li><a href="#habilidades">Habilidades</a></li>
             <li><a href="#experiencia">Experiencia</a></li>
             <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#laboratorios">Laboratorios</a></li>
             <li><a href="#contacto">Contacto</a></li>
         </ul>
     </div>
 </nav>
-
+ 
 <main class="wrap">
-
+ 
     <!-- HERO -->
     <header class="hero">
         <span class="badge"><i></i> Disponible para nuevas oportunidades</span>
@@ -45,13 +47,13 @@
             <a class="btn ghost" href="https://www.linkedin.com/in/emmabia/" target="_blank" rel="noopener">LinkedIn</a>
             <a class="btn ghost" href="#contacto">✉️ Contactar</a>
         </div>
-
+ 
         <!-- TERMINAL -->
         <div class="terminal" id="terminal" title="Clic para escribir" role="group" aria-label="Terminal interactiva: escribí help para ver los comandos disponibles">
             <div class="term-bar"><i></i><i></i><i></i><span class="term-title">emmanuel@noc: ~</span></div>
             <div class="term-body" id="term-body"></div>
         </div>
-
+ 
         <div class="stats">
             <div class="stat"><b>10+</b><span>años de experiencia en soporte IT, telecomunicaciones y administración de infraestructura tecnológica</span></div>
             <div class="stat"><b>Network Operations</b><span>Monitoreo, administración y troubleshooting de redes ISP, routing, switching y disponibilidad de infraestructura.</span></div>
@@ -59,7 +61,7 @@
             <div class="stat"><b>Linux &amp; Scripting</b><span>Manejo de entornos Linux, scripting con Bash y Python, desarrollo de herramientas para automatización de tareas, monitoreo de infraestructura y diagnóstico de redes.</span></div>
         </div>
     </header>
-
+ 
     <!-- SOBRE MI -->
     <section id="sobre-mi" class="reveal">
         <span class="eyebrow">Sobre mí</span>
@@ -93,7 +95,7 @@
             </div>
         </div>
     </section>
-
+ 
     <!-- HABILIDADES -->
     <section id="habilidades" class="reveal">
         <span class="eyebrow">Habilidades</span>
@@ -133,7 +135,7 @@
             </div>
         </div>
     </section>
-
+ 
     <!-- EXPERIENCIA -->
     <section id="experiencia" class="reveal">
         <span class="eyebrow">Experiencia</span>
@@ -169,7 +171,7 @@
             </div>
         </div>
     </section>
-
+ 
     <!-- PROYECTOS -->
     <section id="proyectos" class="reveal">
         <span class="eyebrow">Proyectos</span>
@@ -207,7 +209,50 @@
             </div>
         </div>
     </section>
+ 
+    <!-- LABORATORIOS -->
+    <section id="laboratorios" class="reveal">
+        <span class="eyebrow">Laboratorios</span>
+        <h2>Laboratorios de redes</h2>
+        <p class="sub">Laboratorios prácticos con MikroTik armados en GNS3/EVE-NG. Cada repositorio incluye la topología, las configuraciones y las pruebas de verificación.</p>
+        <div class="grid">
+            <div class="card">
+                <div class="ico">🔀</div>
+                <h3>VLANs en MikroTik</h3>
+                <p>Segmentación de red con VLANs en MikroTik, con configuración y pruebas de conectividad entre segmentos.</p>
+                <div class="tags"><span class="tag">MikroTik</span><span class="tag">VLAN</span><span class="tag">Switching</span></div>
+                <div class="links">
+                    <a class="btn ghost" href="https://github.com/EmmaBia93/lab-vlans-mikrotik" target="_blank" rel="noopener">Ver en GitHub →</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="ico">🗺️</div>
+                <h3>OSPF multiárea</h3>
+                <p>Cuatro routers con áreas 0, 10 y 20, dos ABR y un ASBR con redistribución. Verificación de rutas intra-área, inter-área y externas.</p>
+                <div class="tags"><span class="tag">MikroTik</span><span class="tag">OSPF</span><span class="tag">Routing</span></div>
+                <div class="links">
+                    <a class="btn ghost" href="https://github.com/EmmaBia93/lab-OSPF-mikrotik" target="_blank" rel="noopener">Ver en GitHub →</a>
+                </div>
+            </div>
 
+            <div class="card">
+                <div class="ico">🔀</div>
+                <h3>VPN-IPSEC-IKEv2 en MikroTik</h3>
+                <p>Configuración y pruebas de conectividad de una red privada virtual (VPN) con IPSEC e IKEv2 en MikroTik.</p>
+                <div class="tags"><span class="tag">MikroTik</span><span class="tag">VPN</span><span class="tag">Security</span></div>
+                <div class="links">
+                    <a class="btn ghost" href="https://github.com/EmmaBia93/lab-VPN-IPSEC-IKEv2.git" target="_blank" rel="noopener">Ver en GitHub →</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+ 
+ 
+ 
+    
+ 
+ 
     <!-- CALCULADORA DE SUBREDES -->
     <section id="calculadora" class="reveal">
         <span class="eyebrow">Herramienta</span>
@@ -228,7 +273,7 @@
             <div id="sn-result" aria-live="polite"></div>
         </div>
     </section>
-
+ 
     <!-- FORMACION -->
     <section class="reveal">
         <span class="eyebrow">Formación</span>
@@ -243,7 +288,7 @@
                 <p>Networking, ciberseguridad, Java, Bash y Python, con foco en operaciones de red (NOC/SOC).</p>
             </div>
         </div>
-
+ 
         <!-- CERTIFICACIONES -->
         <div class="certs">
             <span class="eyebrow">Cursos y certificaciones</span>
@@ -289,12 +334,21 @@
                         <div class="hint">Ver certificado →</div>
                     </div>
                 </div>
+                <div class="card cert" role="button" tabindex="0" data-img="assets/img/certificados/ibm-troubleshooting.jpg">
+                    <div class="thumb"><img src="assets/img/certificados/ibm-troubleshooting.jpg" alt="Certificado Personalización de Linux" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span class="fallback">🖥️</span></div>
+                    <div class="body">
+                        <h3>IBM Troubleshooting</h3>
+                        <div class="meta">IBM · Octubre 2026</div>
+                        <div class="hint">Ver certificado →</div>
+                    </div>
+                </div>
+ 
             </div>
         </div>
     </section>
-
+ 
     
-
+ 
     <!-- CONTACTO -->
     <section id="contacto" class="reveal">
         <div class="contact">
@@ -312,17 +366,17 @@
         </div>
     </section>
 </main>
-
+ 
 <!-- Visor de certificados -->
 <div class="lightbox" id="lightbox" role="dialog" aria-label="Certificado ampliado"><img id="lightbox-img" alt=""></div>
-
+ 
 <footer>
     <div class="wrap">
         © <span id="year"></span> Emmanuel Biazzetti · San Juan, Argentina
         <div class="visits" id="visit-counter" hidden><i></i>Visitas: <b id="visit-count">0</b></div>
     </div>
 </footer>
-
+ 
 <script src="js/network.js" defer></script>
 <script src="js/lightbox.js" defer></script>
 <script src="js/subnet.js" defer></script>
@@ -332,6 +386,6 @@
 <script src="js/scroll.js" defer></script>
 <script src="js/console.js" defer></script>
 <script src="js/main.js" defer></script>
-
+ 
 </body>
 </html>

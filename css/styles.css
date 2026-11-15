@@ -443,3 +443,15 @@ nav a.active { color: var(--accent); }
     .sn-results-grid { grid-template-columns: 1fr; }
     .sn-prefix { font-size: 16px; }
 }
+
+.labs { max-width: 960px; margin: 3rem auto; padding: 0 1rem; }
+  .labs h2 { margin-bottom: .5rem; }
+  .labs-intro { opacity: .85; margin-bottom: 1.5rem; }
+  .labs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .labs-card { border: 1px solid rgba(128, 128, 128, .35); border-radius: 12px; padding: 1.25rem; display: flex; flex-direction: column; gap: .75rem; }
+  .labs-card h3 { margin: 0; }
+  .labs-card p { margin: 0; opacity: .9; }
+  .labs-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+  .labs-tags li { font-size: .8rem; padding: .15rem .6rem; border: 1px solid rgba(128, 128, 128, .5); border-radius: 999px; }
+  .labs-link { margin-top: auto; align-self: flex-start; color: inherit; font-weight: 600; text-decoration: none; border-bottom: 2px solid currentColor; }
+  .labs-link:hover { opacity: .75; }
