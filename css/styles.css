@@ -252,7 +252,7 @@ footer { padding: 36px 0 50px; text-align: center; color: var(--muted); font-siz
 }
 .terminal:focus-within { border-color: rgba(56, 189, 248, .45); }
 
-/* línea de comandos interactiva */
+
 .t-prompt { display: flex; align-items: baseline; }
 .t-prompt > * { flex: none; }
 .t-prompt .t-cmd { flex: 1 1 auto; min-width: 0; margin-left: 1ch; }

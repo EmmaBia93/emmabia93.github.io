@@ -6,17 +6,16 @@
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const USER = 'emmanuel@noc';
-    const TYPE_SPEED = 45;   // ms por carácter al tipear la presentación
-    const LINE_GAP = 130;    // ms entre líneas de la presentación
-    const FAST_GAP = 45;     // ms entre líneas en la salida de los comandos
-    const MAX_INPUT = 60;    // largo máximo de lo que se puede escribir
+    const TYPE_SPEED = 45;  
+    const LINE_GAP = 130;    
+    const FAST_GAP = 45;    
+    const MAX_INPUT = 60;   
 
     const EMAIL = 'emmabia2013@gmail.com';
     const GITHUB = 'https://github.com/EmmaBia93';
     const LINKEDIN = 'https://www.linkedin.com/in/emmabia/';
 
-    // Una línea = lista de segmentos [texto, clase, enlace opcional]
-    // Clases: hi, dim, dir, ok, err, link
+    
     const L = (text, cls, href) => [[text, cls, href]];
 
     // ---------- Contenido ----------
@@ -42,13 +41,13 @@
         [['  contacto  ', 'dir'], ['cómo encontrarme', '']],
         [['  ping      ', 'dir'], ['probá: ping oportunidades', '']],
         [['  clear     ', 'dir'], ['limpiar la pantalla', '']],
-        [['  replay    ', 'dir'], ['repetir la presentación', '']],
-        L('Pista: hay algunos comandos ocultos 😉', 'dim'),
+        [['  replay    ', 'dir'], ['repetir la presentación', '']]
+        
     ];
     const STACK = [
-        [['redes     ', 'dim'], ['mikrotik · cisco · ubiquiti · zte · bgp · ospf · vlan · ftth/gpon', '']],
-        [['sistemas  ', 'dim'], ['linux · python · bash · docker · zabbix · grafana', '']],
-        [['dev       ', 'dim'], ['java · spring boot · hibernate/jpa · sql · git', '']],
+        [['redes     ', 'dim'], ['mikrotik·cisco·ubiquiti·zte·bgp·ospf·vlan·ftth/gpon', 'dir']],
+        [['sistemas  ', 'dim'], ['linux·bash·docker·zabbix·grafana', 'dir']],
+        [['dev       ', 'dim'], ['java·spring boot·hibernate/jpa·python·sql·git', 'dir']],
     ];
     const CONTACT = [
         [['email     ', 'dim'], [EMAIL, 'link', 'mailto:' + EMAIL]],
@@ -63,7 +62,7 @@
         L(' 4  oportunidades (10.0.0.1)       1.8 ms', 'ok'),
     ];
 
-    // Guion de la presentación inicial. cmd = comando que se tipea, out = líneas de salida
+    
     const script = [
         { cmd: 'whoami' },
         { out: WHOAMI },
@@ -75,14 +74,14 @@
         { out: PING, gap: 420 },
     ];
 
-    // ---------- Utilidades ----------
+
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
     const own = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
     const short = s => (s.length > 30 ? s.slice(0, 30) + '…' : s);
 
-    let token = 0;        // permite cancelar una ejecución en curso (por ejemplo, al hacer replay)
-    let anchor = null;    // mientras corre un comando, la salida se inserta antes de este prompt
-    let engaged = false;  // el visitante ya interactuó con la terminal
+    let token = 0;       
+    let anchor = null;    
+    let engaged = false;  
     const history = [];
     let hIndex = 0;
     let draft = '';
@@ -117,7 +116,7 @@
         }
     }
 
-    // Prompt que se "tipea" solo (presentación)
+    
     function prompt() {
         const el = line([[USER, 'user'], [':', ''], ['~', 'path'], ['$ ', '']]);
         const typed = document.createElement('span');
@@ -127,7 +126,7 @@
         return { typed, cursor };
     }
 
-    // Prompt interactivo: una línea con un <input> donde el visitante escribe
+    
     function livePrompt() {
         const el = line([[USER, 'user'], [':', ''], ['~', 'path'], ['$', '']]);
         el.classList.add('t-prompt');
@@ -248,7 +247,7 @@
         }
 
         if (e.key === 'Tab') {
-            // solo se intercepta si hay un único comando que completar (así no se bloquea la navegación con Tab)
+           
             const v = input.value.toLowerCase();
             if (!v || /\s/.test(v)) return;
             const matches = COMPLETABLE.filter(c => c.startsWith(v));
@@ -282,8 +281,7 @@
         hIndex = history.length;
         draft = '';
 
-        // El siguiente prompt se crea enseguida (dentro del mismo evento del teclado), oculto y de solo lectura
-        // mientras corre el comando, para que el foco no se pierda (importante en celulares).
+        
         anchor = null;
         const next = livePrompt();
         const my = token;
@@ -333,12 +331,12 @@
         }
 
         if (mine !== token) return;
-        line(L("Escribí 'help' para ver los comandos disponibles.", 'dim'));
+        line(L("Escriba 'help' para ver los comandos disponibles.", 'dim'));
         const p = livePrompt();
         if (engaged) p.input.focus({ preventScroll: true });
     }
 
-    // Un clic en la terminal enfoca la línea de comandos (sin molestar si se está seleccionando texto)
+    
     term.addEventListener('click', e => {
         if (e.target.closest('a')) return;
         if (window.getSelection && String(window.getSelection())) return;
@@ -347,7 +345,7 @@
         if (input) input.focus({ preventScroll: true });
     });
 
-    // Arranca apenas se ve la terminal
+    
     const io = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting) {
             io.disconnect();

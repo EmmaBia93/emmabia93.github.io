@@ -9,19 +9,19 @@
     const CONFIG = {
         maxNodes: 70,              
         linkDist: 140,               
-        mouseDist: 190,              
+        mouseDist: 150,              
         attraction: 0.03,            
         holdMin: 60,                
         holdMax: 150,               
         minGap: 54,                  
-        repel: 0.15,                 
+        repel: 0.2,                 
         nodeColor: '56, 189, 248',  
         linkColor: '99, 102, 241',   
         packetColor: '186, 230, 253',
         maxPackets: 4,               
         packetDuration: 1.4,         
         spawnMin: 0.6,              
-        spawnMax: 1.2,               
+        spawnMax: 1.1,               
     };
 
     let w, h, nodes, packets;
@@ -82,7 +82,7 @@
         if (n.pulse > 0) n.pulse = Math.max(0, n.pulse - 0.03 * step);
     }
 
-    // Separa los nodos que quedaron más cerca que minGap, para que mantengan distancia
+    
     function separate(step) {
         const min = CONFIG.minGap;
         if (!min) return;
@@ -93,10 +93,10 @@
                 const b = nodes[j];
                 let dx = b.x - a.x;
                 let dy = b.y - a.y;
-                if (Math.abs(dx) > min || Math.abs(dy) > min) continue; // descarte rápido
+                if (Math.abs(dx) > min || Math.abs(dy) > min) continue;
                 let d = Math.hypot(dx, dy);
                 if (d >= min) continue;
-                if (d < 0.01) { // exactamente encimados: se empujan en una dirección al azar
+                if (d < 0.01) { 
                     const ang = Math.random() * Math.PI * 2;
                     dx = Math.cos(ang); dy = Math.sin(ang); d = 1;
                 }
